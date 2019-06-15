@@ -1,6 +1,6 @@
 <ul class="todo-list">
     <!-- These are here just to show the structure of the list items -->
-    <app-todo-item></app-todo-item>
+    <app-todo-item [todo]="todo" *ngFor="let todo of todos"></app-todo-item>
     <!-- <li>
         <div class="view">
             <input class="toggle" type="checkbox">
