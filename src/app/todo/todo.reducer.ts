@@ -16,6 +16,7 @@ export function todoReducer( state = estadoInicial, action: fromTodo.Acciones ):
         case fromTodo.AGREGAR_TODO :
             const todo = new Todo( action.texto );
             return [ ...state, todo ];
+
         case fromTodo.EDITAR_TODO :
             return state.map( todoEdit => {
                 if (todoEdit.id === action.id) {
@@ -31,14 +32,28 @@ export function todoReducer( state = estadoInicial, action: fromTodo.Acciones ):
             });
         case fromTodo.BORRAR_TODO :
             return state.filter( todoEdit => todoEdit.id !== action.id );
+
+        case fromTodo.TOGGLE_TODO :
+            return state.map( todoEdit => {
+                if (todoEdit.id === action.id) {
+                    return {
+                        ...todoEdit,
+                        completado: !todoEdit.completado
+                    };
+                }
+
+                return todoEdit;
+            });
         case fromTodo.TOGGLE_ALL_TODO :
 
                 return state.map( todoEdit => {
                     return {
                         ...todoEdit,
-                        completado: action.completado
+                        completado: !action.completado
                     };
                 });
+        case fromTodo.LIMPIAR_COMPLETADOS:
+            return state.filter( todoFilter => !todoFilter.completado);
         default :
             return state;
     }

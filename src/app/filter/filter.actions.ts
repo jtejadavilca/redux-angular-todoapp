@@ -9,4 +9,5 @@ export class SetFilterAction implements Action {
     constructor(public filtro: filtrosValidos) {}
 }
 
+
 export type acciones = SetFilterAction;
